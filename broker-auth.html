@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broker Auth - AlgoZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            'bg-primary': '#1a1a1a',
+                            'bg-secondary': '#2d2d2d',
+                            'text-primary': '#ffffff',
+                            'text-secondary': '#a0aec0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-['Inter'] bg-gray-50 dark:bg-dark-bg-primary dark:text-dark-text-primary transition-colors duration-200">
+    <!-- Header -->
+    <header class="fixed w-full bg-white dark:bg-dark-bg-secondary shadow-sm z-50 transition-colors duration-200">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="text-2xl font-bold">AlgoZ</div>
+
+                <!-- User Info & Menu -->
+                <div class="flex items-center space-x-6">
+                    <!-- Theme Toggle -->
+                    <button id="themeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                        <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+                        <i class="fas fa-moon text-blue-400 hidden dark:block"></i>
+                    </button>
+
+                    <!-- User Info -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <div class="text-right">
+                            <div class="text-sm font-medium text-gray-900 dark:text-white" id="username">Loading...</div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400" id="clientCode">Client #--</div>
+                        </div>
+                        <div class="border-l border-gray-300 dark:border-gray-600 h-8 mx-2"></div>
+                        <div class="text-right">
+                            <div class="text-sm font-medium text-blue-600 dark:text-blue-400" id="coinBalance">0 Z Coins</div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400">Balance</div>
+                        </div>
+                    </div>
+
+                    <!-- User Avatar & Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center focus:outline-none" id="userMenuButton">
+                            <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-lg" id="userAvatar">
+                                ?
+                            </div>
+                        </button>
+
+                        <!-- Dropdown Menu -->
+                        <div class="absolute right-0 mt-2 w-48 bg-white dark:bg-dark-bg-secondary rounded-lg shadow-lg py-2 hidden group-hover:block animate-fadeIn">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-150">
+                                <i class="fas fa-user mr-2"></i> Profile
+                            </a>
+                            <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-150">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden" id="mobileMenuButton">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Left Side Panel -->
+    <aside class="fixed left-0 top-0 h-full w-64 bg-white dark:bg-dark-bg-secondary shadow-lg pt-20 transition-all duration-300 transform md:translate-x-0 -translate-x-full z-40" id="sidePanel">
+        <div class="h-full flex flex-col px-4 py-2">
+            <!-- Search Bar -->
+            <div class="mb-4">
+                <div class="relative">
+                    <input type="text" id="brokerSearch" placeholder="Search brokers..." 
+                        class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Broker List -->
+            <div class="flex-1 space-y-1 overflow-y-auto" id="brokerList">
+                <!-- Brokers will be dynamically added here -->
+            </div>
+
+            <!-- Continue Button (Hidden by default) -->
+            <div id="continueButtonContainer" class="hidden mt-4 px-2">
+                <button id="continueButton" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
+                    <span>Continue</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="transition-all duration-300 md:ml-64 pt-24 pb-12">
+        <div class="container mx-auto px-6">
+            <!-- Welcome Message -->
+            <div class="bg-white dark:bg-dark-bg-secondary rounded-2xl shadow-sm p-8 mb-8 animate-fadeIn">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Broker Authentication</h1>
+                <p class="text-gray-600 dark:text-gray-400">Select your broker from the list to proceed with authentication.</p>
+            </div>
+
+            <!-- Instructions -->
+            <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 mb-8">
+                <h2 class="text-lg font-semibold text-blue-800 dark:text-blue-300 mb-3">How to proceed:</h2>
+                <ol class="list-decimal list-inside space-y-2 text-blue-700 dark:text-blue-200">
+                    <li>Select your broker from the list on the left</li>
+                    <li>Click the Continue button that appears</li>
+                    <li>Follow the authentication steps for your selected broker</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Broker list data
+        const brokers = [
+            "5 Paisa", "Alice Blue", "Angel One", "Binance", "Delta Exchange",
+            "Dhan", "Finvasia", "Fyers", "FlatTrade", "IIFL", "Kotak Neo",
+            "MetaTrader 4", "MetaTrader 5", "Samco", "Samcoin", "Trade Smart",
+            "Upstox", "Zerodha"
+        ].sort();
+
+        // DOM Elements
+        const brokerList = document.getElementById('brokerList');
+        const brokerSearch = document.getElementById('brokerSearch');
+        const continueButtonContainer = document.getElementById('continueButtonContainer');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const sidePanel = document.getElementById('sidePanel');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // Function to create broker list items
+        function createBrokerList(filteredBrokers = brokers) {
+            brokerList.innerHTML = '';
+            filteredBrokers.forEach(broker => {
+                const item = document.createElement('div');
+                item.className = 'broker-item px-4 py-2 rounded-lg cursor-pointer text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200';
+                item.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-building mr-3"></i>
+                        <span>${broker}</span>
+                    </div>
+                `;
+                item.addEventListener('click', () => selectBroker(item, broker));
+                brokerList.appendChild(item);
+            });
+        }
+
+        // Function to handle broker selection
+        function selectBroker(element, broker) {
+            // Remove selection from all items
+            document.querySelectorAll('.broker-item').forEach(item => {
+                item.classList.remove('bg-blue-50', 'dark:bg-blue-900/20', 'text-blue-600', 'dark:text-blue-400');
+            });
+
+            // Add selection to clicked item
+            element.classList.add('bg-blue-50', 'dark:bg-blue-900/20', 'text-blue-600', 'dark:text-blue-400');
+            
+            // Show continue button
+            continueButtonContainer.classList.remove('hidden');
+            continueButtonContainer.classList.add('animate-fadeIn');
+
+            // Store selected broker
+            localStorage.setItem('selectedBroker', broker);
+        }
+
+        // Search functionality
+        brokerSearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredBrokers = brokers.filter(broker => 
+                broker.toLowerCase().includes(searchTerm)
+            );
+            createBrokerList(filteredBrokers);
+        });
+
+        // Mobile menu toggle
+        mobileMenuButton.addEventListener('click', () => {
+            sidePanel.classList.toggle('-translate-x-full');
+        });
+
+        // Theme toggle
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', 
+                document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+            );
+        });
+
+        // Continue button click handler
+        document.getElementById('continueButton').addEventListener('click', () => {
+            const selectedBroker = localStorage.getItem('selectedBroker');
+            if (selectedBroker) {
+                // To be implemented: Redirect to broker-specific auth page
+                alert(`Proceeding with ${selectedBroker} authentication...`);
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check authentication
+            const userData = JSON.parse(localStorage.getItem('algoz_user'));
+            if (!userData) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Update user info in header
+            document.getElementById('username').textContent = userData.username;
+            document.getElementById('clientCode').textContent = `Client #${userData.clientCode}`;
+            document.getElementById('coinBalance').textContent = `${userData.coins || 0} Z Coins`;
+            document.getElementById('userAvatar').textContent = userData.username.charAt(0).toUpperCase();
+
+            // Create initial broker list
+            createBrokerList();
+
+            // Check for saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+            }
+
+            // Check for saved broker selection
+            const savedBroker = localStorage.getItem('selectedBroker');
+            if (savedBroker) {
+                const brokerItem = Array.from(document.querySelectorAll('.broker-item'))
+                    .find(item => item.textContent.trim() === savedBroker);
+                if (brokerItem) {
+                    selectBroker(brokerItem, savedBroker);
+                }
+            }
+
+            // Handle expandable menu items
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                const button = item.querySelector('button');
+                const submenu = item.querySelector('ul');
+                const arrow = button.querySelector('.fa-chevron-right');
+
+                button.addEventListener('click', () => {
+                    submenu.classList.toggle('hidden');
+                    arrow.classList.toggle('rotate-90');
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth < 768 && 
+                    !sidePanel.contains(e.target) && 
+                    !mobileMenuButton.contains(e.target)) {
+                    sidePanel.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        // Handle logout
+        function handleLogout() {
+            localStorage.removeItem('algoz_user');
+            localStorage.removeItem('selectedBroker');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html> 

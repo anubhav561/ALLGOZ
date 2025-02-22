@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoZ - Advanced Algo Trading Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            'bg-primary': '#1a1a1a',
+                            'bg-secondary': '#2d2d2d',
+                            'text-primary': '#ffffff',
+                            'text-secondary': '#a0aec0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-['Inter'] bg-gray-50 dark:bg-dark-bg-primary dark:text-dark-text-primary transition-colors duration-200">
+    <!-- Header -->
+    <header class="fixed w-full bg-white dark:bg-dark-bg-secondary shadow-sm z-50 transition-colors duration-200">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold dark:text-white">AlgoZ</div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <div class="relative group">
+                        <button class="flex items-center space-x-1 text-gray-700 dark:text-gray-200">
+                            <span>Features</span>
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </button>
+                        <div class="absolute hidden group-hover:block w-48 bg-white dark:bg-dark-bg-secondary shadow-lg mt-2 py-2 rounded-lg">
+                            <a href="#features" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Trading Tools</a>
+                            <a href="#brokers" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Broker Integration</a>
+                            <a href="#bots" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Custom Bots</a>
+                        </div>
+                    </div>
+                    <a href="login.html" class="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">Login</a>
+                    <a href="signup.html" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Sign Up</a>
+                </div>
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-2xl dark:text-white"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white dark:from-dark-bg-primary dark:to-dark-bg-secondary">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-gray-900 dark:text-white">
+                Revolutionize Your Trading with Advanced Algo Tools
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto">
+                Access 25+ Indian and Forex Brokers, One-Click Scalping Tools, and Custom Bots for TradingView, MetaTrader, and AmiBroker
+            </p>
+            <a href="#" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300">
+                Get Started Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-bolt text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-3">One-Click Scalping Tools</h3>
+                    <p class="text-gray-600 text-center">Advanced tools for Futures and Options trading with instant execution</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-copy text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-3">Copy Trading</h3>
+                    <p class="text-gray-600 text-center">Replicate successful traders' strategies in Forex markets</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-robot text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-3">Custom Bots</h3>
+                    <p class="text-gray-600 text-center">Automated strategies for TradingView, MetaTrader, and AmiBroker</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-store text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-3">Strategy Marketplace</h3>
+                    <p class="text-gray-600 text-center">Sell your trading strategies on our platform</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Broker Integration Section -->
+    <section id="brokers" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16">Seamless Integration with 25+ Brokers</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <!-- Placeholder broker logos -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-20 flex items-center justify-center">
+                        <div class="w-32 h-12 bg-gray-200 rounded"></div>
+                    </div>
+                </div>
+                <!-- Repeat placeholder 5 more times -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-20 flex items-center justify-center">
+                        <div class="w-32 h-12 bg-gray-200 rounded"></div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-20 flex items-center justify-center">
+                        <div class="w-32 h-12 bg-gray-200 rounded"></div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-20 flex items-center justify-center">
+                        <div class="w-32 h-12 bg-gray-200 rounded"></div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-20 flex items-center justify-center">
+                        <div class="w-32 h-12 bg-gray-200 rounded"></div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-20 flex items-center justify-center">
+                        <div class="w-32 h-12 bg-gray-200 rounded"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools and Bots Section -->
+    <section id="bots" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16">Trading Tools & Bots</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-4">Pine Script Bots</h3>
+                    <p class="text-gray-600 mb-6">Create and customize your TradingView strategies with Pine Script</p>
+                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">Learn More →</a>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-4">MQL Bots</h3>
+                    <p class="text-gray-600 mb-6">Develop advanced MetaTrader bots using MQL programming</p>
+                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">Learn More →</a>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-4">AFL Scripts</h3>
+                    <p class="text-gray-600 mb-6">Build powerful AmiBroker formulas with AFL scripting</p>
+                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16">What Our Users Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-semibold">John Doe</h4>
+                            <p class="text-gray-600 text-sm">Forex Trader</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"This platform transformed my trading experience! The automation tools are incredible."</p>
+                </div>
+                <!-- Add two more testimonials -->
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-semibold">Sarah Smith</h4>
+                            <p class="text-gray-600 text-sm">Options Trader</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The one-click scalping tools have significantly improved my trading efficiency."</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-semibold">Mike Johnson</h4>
+                            <p class="text-gray-600 text-sm">Algo Trader</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The custom bot development features are exactly what I needed for my strategies."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16">Pricing Plans</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-4">Basic</h3>
+                    <div class="text-3xl font-bold mb-6">$29<span class="text-lg text-gray-600">/month</span></div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Basic Trading Tools</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>5 Custom Bots</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Email Support</li>
+                    </ul>
+                    <a href="#" class="block text-center bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Sign Up</a>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition duration-300 border-2 border-blue-600">
+                    <div class="absolute top-0 right-0 bg-blue-600 text-white px-4 py-1 rounded-bl-lg">Popular</div>
+                    <h3 class="text-xl font-semibold mb-4">Pro</h3>
+                    <div class="text-3xl font-bold mb-6">$79<span class="text-lg text-gray-600">/month</span></div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Advanced Trading Tools</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Unlimited Custom Bots</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Priority Support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Strategy Marketplace</li>
+                    </ul>
+                    <a href="#" class="block text-center bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Sign Up</a>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-4">Enterprise</h3>
+                    <div class="text-3xl font-bold mb-6">Custom</div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Custom Solutions</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Dedicated Support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>API Access</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Custom Integration</li>
+                    </ul>
+                    <a href="#" class="block text-center bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">More Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400">Community</a></li>
+                        <li><a href="#" class="hover:text-blue-400">YouTube Channel</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Indicator Request</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Resource</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Pages</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400">Affiliate Program</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Terms of Condition</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Refund Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400">Telegram Chat</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <form class="space-y-4">
+                        <input type="email" placeholder="Enter your email" class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-blue-500">
+                        <button class="w-full bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Subscribe</button>
+                    </form>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+                <p class="mb-4">Trading in financial markets involves risk. Ensure you understand the risks involved before trading. Past performance is not indicative of future results.</p>
+                <p>&copy; 2024 AlgoZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add storage.js before the closing body tag -->
+    <script type="module">
+        import StorageManager from './js/storage.js';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            
+            // Check for saved theme preference using StorageManager
+            const savedTheme = StorageManager.getItem('theme');
+            if (savedTheme) {
+                html.classList.add(savedTheme);
+            }
+
+            themeToggle?.addEventListener('click', function() {
+                html.classList.toggle('dark');
+                StorageManager.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            });
+
+            // Handle newsletter subscription
+            const newsletterForm = document.querySelector('footer form');
+            newsletterForm?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                if (email) {
+                    const preferences = StorageManager.getTradingPreferences() || {};
+                    preferences.newsletter = email;
+                    StorageManager.saveTradingPreferences(preferences);
+                    alert('Thank you for subscribing!');
+                    this.reset();
+                }
+            });
+
+            // Check if user is logged in
+            if (StorageManager.isLoggedIn()) {
+                const userProfile = StorageManager.getUserProfile();
+                if (userProfile) {
+                    // Update UI for logged-in user
+                    const loginBtn = document.querySelector('a[href="login.html"]');
+                    const signupBtn = document.querySelector('a[href="signup.html"]');
+                    if (loginBtn && signupBtn) {
+                        loginBtn.textContent = userProfile.name || 'My Account';
+                        loginBtn.href = 'dashboard.html';
+                        signupBtn.style.display = 'none';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
